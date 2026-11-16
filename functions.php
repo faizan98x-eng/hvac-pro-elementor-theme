@@ -49,9 +49,12 @@ add_action( 'after_setup_theme', 'hvac_pro_content_width', 0 );
  * Styles & scripts.
  */
 function hvac_pro_assets() {
+	$css_path = get_template_directory() . '/assets/css/theme.css';
+	$js_path  = get_template_directory() . '/assets/js/theme.js';
+
 	wp_enqueue_style( 'hvac-pro-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap', array(), null );
-	wp_enqueue_style( 'hvac-pro-theme', get_template_directory_uri() . '/assets/css/theme.css', array(), HVAC_PRO_VERSION );
-	wp_enqueue_script( 'hvac-pro-theme', get_template_directory_uri() . '/assets/js/theme.js', array(), HVAC_PRO_VERSION, true );
+	wp_enqueue_style( 'hvac-pro-theme', get_template_directory_uri() . '/assets/css/theme.css', array(), file_exists( $css_path ) ? filemtime( $css_path ) : HVAC_PRO_VERSION );
+	wp_enqueue_script( 'hvac-pro-theme', get_template_directory_uri() . '/assets/js/theme.js', array(), file_exists( $js_path ) ? filemtime( $js_path ) : HVAC_PRO_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'hvac_pro_assets' );
 

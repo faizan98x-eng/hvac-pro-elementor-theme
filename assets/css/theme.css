@@ -164,11 +164,11 @@ section{position:relative;}
 }
 .mobile-nav.open{transform:translateX(0);}
 .mobile-nav-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px;}
-.mobile-nav-head img{height:36px;}
+.mobile-nav-head img{height:36px;width:auto;}
 .mobile-nav-close{background:none;border:1px solid rgba(255,255,255,.2);width:38px;height:38px;border-radius:50%;color:#fff;font-size:18px;}
 .mobile-nav ul{display:flex;flex-direction:column;gap:4px;}
 .mobile-nav a{display:block;color:#fff;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-weight:500;}
-.mobile-nav .btn{margin-top:24px;width:100%;justify-content:center;}
+.mobile-nav .btn{margin-top:24px;width:100%;justify-content:center;padding:16px 32px;}
 .nav-overlay{position:fixed;inset:0;background:rgba(10,10,25,.55);z-index:1050;opacity:0;pointer-events:none;transition:opacity var(--transition);}
 .nav-overlay.open{opacity:1;pointer-events:auto;}
 
@@ -413,6 +413,26 @@ section{position:relative;}
 .contact-form .btn{width:100%;justify-content:center;margin-top:6px;}
 .form-note{font-size:12px;color:var(--grey);margin-top:14px;text-align:center;}
 
+/* Contact Form 7's own markup (no .btn class available to add to it) */
+.wpcf7-form .wpcf7-submit{
+  display:flex;align-items:center;justify-content:center;width:100%;
+  padding:16px 32px;margin-top:6px;border-radius:50px;border:2px solid transparent;
+  background:var(--blue);color:var(--white);font-family:var(--font);
+  font-weight:600;font-size:14px;letter-spacing:.02em;
+  box-shadow:0 10px 24px rgba(37,171,224,.35);transition:all var(--transition);cursor:pointer;
+}
+.wpcf7-form .wpcf7-submit:hover{background:var(--blue-dark);transform:translateY(-3px);box-shadow:0 16px 30px rgba(37,171,224,.4);}
+.wpcf7-form .wpcf7-submit:disabled{opacity:.7;cursor:default;transform:none;}
+.wpcf7-spinner{margin:0 0 0 10px;}
+.wpcf7-form-control-wrap{display:block;}
+.wpcf7-not-valid-tip{color:#e6554c;font-size:12.5px;margin-top:6px;}
+.wpcf7-response-output{
+  margin:18px 0 0 !important;border-radius:var(--radius) !important;font-size:13.5px !important;
+  padding:14px 18px !important;
+}
+.wpcf7-mail-sent-ok{border-color:#2fae6e !important;color:#1f8552 !important;}
+.wpcf7-validation-errors,.wpcf7-mail-sent-ng{border-color:#e6554c !important;color:#c7392f !important;}
+
 /* ---------- Blog ---------- */
 .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;}
 .blog-card{
@@ -433,7 +453,7 @@ section{position:relative;}
 /* ---------- Footer ---------- */
 .site-footer{background:var(--navy);color:var(--grey);}
 .footer-top{padding:84px 0 56px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px;}
-.footer-about img{height:44px;margin-bottom:22px;}
+.footer-about img{height:44px;width:auto;margin-bottom:22px;}
 .footer-about p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:22px;}
 .footer-social{display:flex;gap:10px;}
 .footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;}
@@ -546,4 +566,32 @@ section{position:relative;}
 
 @media(max-width:767px){
   .page-hero{padding:130px 0 60px;}
+}
+
+/* ---------- Elementor container padding reset ----------
+   Elementor's Container element defaults to 10px padding on every
+   side unless a widget/container explicitly sets its own, which was
+   leaking the page's white background in at the edge of every
+   full-bleed section (hero, coloured bands, etc.) and shrinking the
+   contact-info/contact-form panels down to 10px instead of their
+   intended padding. Our markup handles 100% of its own spacing, so
+   remove Elementor's default everywhere and re-apply it only on the
+   few containers that are themselves the visual box (page hero,
+   contact panels, the inner `.container` gutter). */
+.elementor .e-con{padding:0 !important;}
+.elementor .page-hero{padding:160px 0 90px !important;}
+.elementor .container{padding:0 24px !important;}
+.elementor .contact-info{padding:60px 50px !important;}
+.elementor .contact-form{padding:60px 52px !important;}
+
+@media(max-width:767px){
+  .elementor .page-hero{padding:130px 0 60px !important;}
+  .elementor .contact-info,.elementor .contact-form{padding:40px 26px !important;}
+}
+
+/* ---------- Small ad-hoc grids (2-up / 3-up card rows) ---------- */
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+@media(max-width:767px){
+  .grid-2,.grid-3{grid-template-columns:1fr;}
 }
