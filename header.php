@@ -51,15 +51,11 @@ $hvac_quote   = get_theme_mod( 'hvac_quote_url', '#' );
 
 <header class="site-header">
 	<div class="container header-inner">
-		<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand">
-			<?php
-			if ( has_custom_logo() ) {
-				the_custom_logo();
-			} else {
-				bloginfo( 'name' );
-			}
-			?>
-		</a>
+		<?php if ( has_custom_logo() ) : ?>
+			<div class="brand"><?php the_custom_logo(); ?></div>
+		<?php else : ?>
+			<a href="<?php echo esc_url( home_url( '/' ) ); ?>" class="brand"><?php bloginfo( 'name' ); ?></a>
+		<?php endif; ?>
 
 		<nav class="main-nav" aria-label="<?php esc_attr_e( 'Primary', 'hvac-pro' ); ?>">
 			<?php
