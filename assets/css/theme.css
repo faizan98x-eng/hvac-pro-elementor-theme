@@ -497,6 +497,7 @@ section{position:relative;}
 @media(max-width:767px){
   .topbar .topbar-left{display:none;}
   .topbar .container{justify-content:center;}
+  .site-header{height:78px;}
   .header-inner{height:78px;}
   .brand img{height:36px;}
   .hero{min-height:auto;padding-top:10px;}
