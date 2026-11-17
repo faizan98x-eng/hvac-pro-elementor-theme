@@ -579,6 +579,17 @@ section{position:relative;}
    few containers that are themselves the visual box (page hero,
    contact panels, the inner `.container` gutter). */
 .elementor .e-con{padding:0 !important;}
+
+/* Every top-level page section was authored as hand-coded full-bleed HTML
+   (hero, coloured bands, CTA strips, etc.) and relies on its own
+   `.container`/`.pad`-style classes for the inner content width. Elementor's
+   per-container "Boxed" content-width setting fights that by capping the
+   whole section at ~1140px and centring it, which is what shows up as
+   white margins down both edges. Force every boxed container's inner wrap
+   back to full width so the section's own background always reaches the
+   viewport edge. */
+.elementor .e-con-boxed > .e-con-inner{max-width:none !important;}
+
 .elementor .page-hero{padding:160px 0 90px !important;}
 .elementor .container{padding:0 24px !important;}
 .elementor .contact-info{padding:60px 50px !important;}
