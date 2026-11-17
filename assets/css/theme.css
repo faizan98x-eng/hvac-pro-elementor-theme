@@ -580,6 +580,15 @@ section{position:relative;}
    few containers that are themselves the visual box (page hero,
    contact panels, the inner `.container` gutter). */
 .elementor .e-con{padding:0 !important;}
+/* "Boxed" containers wrap their content in an extra `.e-con-inner` div
+   that carries its own independent top/bottom padding (defaulting to
+   10px, separately from `.e-con` above), inconsistently left at that
+   default on some containers depending on how each was configured in
+   the editor. That stray 10px gap is what exposed a sliver of the page's
+   white background as a seam above/below a handful of sections. Reset
+   it everywhere so every section always butts flush against its
+   neighbour regardless of per-container editor settings. */
+.elementor .e-con-inner{padding:0 !important;}
 
 /* Every top-level page section was authored as hand-coded full-bleed HTML
    (hero, coloured bands, CTA strips, etc.) and relies on its own
