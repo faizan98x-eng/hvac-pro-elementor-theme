@@ -129,7 +129,7 @@ section{position:relative;}
 
 /* ---------- Header ---------- */
 .site-header{
-  position:sticky;top:0;z-index:999;
+  position:sticky;top:0;z-index:999;height:92px;overflow:hidden;
   background:var(--navy);
   transition:box-shadow var(--transition), padding var(--transition);
 }
@@ -590,13 +590,24 @@ section{position:relative;}
    viewport edge. */
 .elementor .e-con-boxed > .e-con-inner{max-width:none !important;}
 
-.elementor .page-hero{padding:160px 0 90px !important;}
-.elementor .container{padding:0 24px !important;}
+.elementor .page-hero{padding:70px 0 50px !important;}
+/* Elementor's own flex reset zeroes out the margin our base `.container`
+   rule needs to centre itself, so every section's inner content was
+   hugging the left edge with empty space on the right on any screen wider
+   than the 1240px content width (the contact form, the header row, the
+   footer columns — all of it). Force the centring margin back. */
+.elementor .container{padding:0 24px !important;margin-left:auto !important;margin-right:auto !important;}
 .elementor .contact-info{padding:60px 50px !important;}
 .elementor .contact-form{padding:60px 52px !important;}
 
+/* Defensive 1px overlap so no sliver of the page background can ever show
+   between the footer and whatever section precedes it (sub-pixel
+   rounding on fractional-height sections shows up as a hairline seam on
+   some displays). */
+.site-footer{margin-top:-1px !important;}
+
 @media(max-width:767px){
-  .elementor .page-hero{padding:130px 0 60px !important;}
+  .elementor .page-hero{padding:56px 0 36px !important;}
   .elementor .contact-info,.elementor .contact-form{padding:40px 26px !important;}
 }
 
