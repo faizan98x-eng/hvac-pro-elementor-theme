@@ -901,8 +901,9 @@ section{position:relative;}
 }
 /* Mobile: single column everywhere, comfortable touch targets. */
 @media(max-width:767px){
-  .topbar .topbar-left{display:none;}
-  .topbar .container{justify-content:center;}
+  /* The contact strip has no room on phones; hide the whole bar rather than
+     leaving an empty band above the header. */
+  .topbar{display:none;}
   .header-inner{height:78px;}
   .site-header.is-stuck .header-inner{height:70px;}
   .brand img{height:54px;}
