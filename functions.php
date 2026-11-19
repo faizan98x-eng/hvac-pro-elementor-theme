@@ -181,6 +181,24 @@ function hvac_pro_customize_register( $wp_customize ) {
 add_action( 'customize_register', 'hvac_pro_customize_register' );
 
 /**
+ * Contact-detail links. The phone number opens a WhatsApp chat and the
+ * address opens Google Maps, both in a new tab, so every detail on the
+ * site is one tap away on a phone.
+ */
+function hvac_pro_whatsapp_url( $phone ) {
+	$digits = preg_replace( '/[^0-9]/', '', $phone );
+	// UK local format (07...) → international (447...).
+	if ( 0 === strpos( $digits, '0' ) ) {
+		$digits = '44' . substr( $digits, 1 );
+	}
+	return 'https://wa.me/' . $digits;
+}
+
+function hvac_pro_maps_url( $address ) {
+	return 'https://www.google.com/maps/search/?api=1&query=' . rawurlencode( $address );
+}
+
+/**
  * Small helper so templates can print a social icon link only when a URL
  * has actually been set in the Customizer.
  */

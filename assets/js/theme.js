@@ -44,20 +44,90 @@ document.addEventListener('DOMContentLoaded', function () {
     if (prevBtn) prevBtn.addEventListener('click', function(){ prev(); resetAutoplay(); });
   }
 
-  /* Testimonial slider */
+  /* Testimonial slider: shows as many cards as fit (3 / 2 / 1 per CSS) and
+     pages through them; the dots are rebuilt whenever the count changes. */
   var tSlides = document.querySelector('.t-slides');
-  var tDots = document.querySelectorAll('.t-controls button');
-  var tCurrent = 0;
-  function tGoTo(i){
-    tCurrent = (i + tDots.length) % tDots.length;
-    tSlides.style.transform = 'translateX(-' + (tCurrent * 100) + '%)';
-    tDots.forEach(function(d){ d.classList.remove('active'); });
-    tDots[tCurrent].classList.add('active');
+  var tControls = document.querySelector('.t-controls');
+  if (tSlides && tControls){
+    var tItems = tSlides.querySelectorAll('.t-slide');
+    var tPage = 0, tPages = 1, tTimer;
+    function tPerPage(){
+      var w = tItems[0].getBoundingClientRect().width;
+      return Math.max(1, Math.round(tSlides.getBoundingClientRect().width / w));
+    }
+    function tRender(){
+      tControls.innerHTML = '';
+      for (var p = 0; p < tPages; p++){
+        var b = document.createElement('button');
+        b.setAttribute('aria-label', 'Testimonials page ' + (p + 1));
+        if (p === tPage) b.classList.add('active');
+        (function(idx){ b.addEventListener('click', function(){ tGoTo(idx); tRestart(); }); })(p);
+        tControls.appendChild(b);
+      }
+    }
+    function tGoTo(i){
+      tPage = (i + tPages) % tPages;
+      tSlides.style.transform = 'translateX(-' + (tPage * 100) + '%)';
+      var dots = tControls.querySelectorAll('button');
+      dots.forEach(function(d, k){ d.classList.toggle('active', k === tPage); });
+    }
+    function tLayout(){
+      tPages = Math.ceil(tItems.length / tPerPage());
+      if (tPage > tPages - 1) tPage = 0;
+      tRender();
+      tGoTo(tPage);
+    }
+    function tRestart(){ clearInterval(tTimer); tTimer = setInterval(function(){ tGoTo(tPage + 1); }, 6000); }
+    tLayout();
+    tRestart();
+    var tResize;
+    window.addEventListener('resize', function(){ clearTimeout(tResize); tResize = setTimeout(tLayout, 150); });
   }
-  if (tSlides && tDots.length){
-    tDots.forEach(function(d,i){ d.addEventListener('click', function(){ tGoTo(i); }); });
-    setInterval(function(){ tGoTo(tCurrent + 1); }, 5500);
-  }
+
+  /* FAQ accordion: animate <details> open/close instead of snapping. */
+  document.querySelectorAll('.faq-item').forEach(function(item){
+    var summary = item.querySelector('summary');
+    var answer  = item.querySelector('.faq-answer');
+    if (!summary || !answer) return;
+    var busy = false;
+    summary.addEventListener('click', function(e){
+      e.preventDefault();
+      if (busy) return;
+      busy = true;
+      if (item.open){
+        answer.style.height = answer.scrollHeight + 'px';
+        requestAnimationFrame(function(){
+          answer.style.height = '0px';
+          answer.style.paddingBottom = '0px';
+          answer.style.opacity = '0';
+        });
+        answer.addEventListener('transitionend', function done(ev){
+          if (ev.propertyName !== 'height') return;
+          answer.removeEventListener('transitionend', done);
+          item.open = false;
+          answer.style.height = answer.style.paddingBottom = answer.style.opacity = '';
+          busy = false;
+        });
+      } else {
+        item.open = true;
+        var target = answer.scrollHeight;
+        answer.style.height = '0px';
+        answer.style.paddingBottom = '0px';
+        answer.style.opacity = '0';
+        requestAnimationFrame(function(){
+          answer.style.height = target + 'px';
+          answer.style.paddingBottom = '';
+          answer.style.opacity = '1';
+        });
+        answer.addEventListener('transitionend', function done(ev){
+          if (ev.propertyName !== 'height') return;
+          answer.removeEventListener('transitionend', done);
+          answer.style.height = answer.style.opacity = '';
+          busy = false;
+        });
+      }
+    });
+  });
 
   /* Scroll reveal */
   var reveals = document.querySelectorAll('.reveal');
@@ -70,18 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
     reveals.forEach(function(el){ io.observe(el); });
   } else {
     reveals.forEach(function(el){ el.classList.add('in'); });
-  }
-
-  /* Enquiry form (prototype — replace with real handler when wired into WordPress) */
-  var form = document.querySelector('.contact-form form');
-  if (form){
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var btn = form.querySelector('button[type="submit"]');
-      var original = btn.textContent;
-      btn.textContent = 'Preview mode — connect this form in WordPress';
-      setTimeout(function(){ btn.textContent = original; }, 2600);
-    });
   }
 
 });

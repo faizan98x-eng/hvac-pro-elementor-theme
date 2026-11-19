@@ -24,7 +24,7 @@ $hvac_quote   = get_theme_mod( 'hvac_quote_url', '#' );
 	<div class="container">
 		<div class="topbar-left">
 			<?php if ( $hvac_phone ) : ?>
-				<a href="tel:<?php echo esc_attr( preg_replace( '/[^+0-9]/', '', $hvac_phone ) ); ?>">
+				<a href="<?php echo esc_url( hvac_pro_whatsapp_url( $hvac_phone ) ); ?>" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Message us on WhatsApp', 'hvac-pro' ); ?>">
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 2-2Z"/></svg>
 					<?php echo esc_html( $hvac_phone ); ?>
 				</a>
@@ -36,10 +36,10 @@ $hvac_quote   = get_theme_mod( 'hvac_quote_url', '#' );
 				</a>
 			<?php endif; ?>
 			<?php if ( $hvac_address ) : ?>
-				<span>
+				<a href="<?php echo esc_url( hvac_pro_maps_url( $hvac_address ) ); ?>" target="_blank" rel="noopener noreferrer" title="<?php esc_attr_e( 'Open in Google Maps', 'hvac-pro' ); ?>">
 					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg>
 					<?php echo esc_html( $hvac_address ); ?>
-				</span>
+				</a>
 			<?php endif; ?>
 		</div>
 		<div class="topbar-social">

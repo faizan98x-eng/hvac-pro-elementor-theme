@@ -43,13 +43,13 @@ $hvac_address = get_theme_mod( 'hvac_address' );
 				<h4><?php esc_html_e( 'Contact Info', 'hvac-pro' ); ?></h4>
 				<ul class="footer-contact">
 					<?php if ( $hvac_address ) : ?>
-					<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><?php echo esc_html( $hvac_address ); ?></li>
+					<li><a href="<?php echo esc_url( hvac_pro_maps_url( $hvac_address ) ); ?>" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span><?php echo esc_html( $hvac_address ); ?></span></a></li>
 					<?php endif; ?>
 					<?php if ( $hvac_phone ) : ?>
-					<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 2-2Z"/></svg><?php echo esc_html( $hvac_phone ); ?></li>
+					<li><a href="<?php echo esc_url( hvac_pro_whatsapp_url( $hvac_phone ) ); ?>" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L14 13l5 2v4a2 2 0 0 1-2 2C9.5 21 3 14.5 3 6a2 2 0 0 1 2-2Z"/></svg><span><?php echo esc_html( $hvac_phone ); ?></span></a></li>
 					<?php endif; ?>
 					<?php if ( $hvac_email ) : ?>
-					<li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><?php echo esc_html( $hvac_email ); ?></li>
+					<li><a href="mailto:<?php echo esc_attr( $hvac_email ); ?>"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></svg><span><?php echo esc_html( $hvac_email ); ?></span></a></li>
 					<?php endif; ?>
 				</ul>
 			</div>
