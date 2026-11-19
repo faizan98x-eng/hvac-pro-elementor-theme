@@ -735,6 +735,7 @@ section{position:relative;}
    than the 1240px content width (the contact form, the header row, the
    footer columns — all of it). Force the centring margin back. */
 .elementor .container{padding:0 24px !important;margin-left:auto !important;margin-right:auto !important;}
+.elementor .contact-wrap{border-radius:var(--radius-lg) !important;overflow:hidden !important;}
 .elementor .contact-info{padding:60px 50px !important;}
 .elementor .contact-form{padding:60px 52px !important;}
 
