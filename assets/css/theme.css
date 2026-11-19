@@ -486,7 +486,7 @@ section{position:relative;}
 
 /* ---------- Footer ---------- */
 .site-footer{background:var(--navy);color:var(--grey);}
-.footer-top{padding:84px 0 56px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px;}
+.footer-top{padding:84px 24px 56px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px;}
 .footer-about img{height:44px;width:auto;margin-bottom:22px;}
 .footer-about p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:22px;}
 .footer-social{display:flex;gap:10px;}
@@ -499,7 +499,7 @@ section{position:relative;}
 .footer-links a:hover{color:var(--blue);padding-left:4px;}
 .footer-contact li{display:flex;gap:12px;margin-bottom:18px;font-size:14px;color:var(--grey);line-height:1.6;}
 .footer-contact svg{width:17px;height:17px;color:var(--blue);flex:none;margin-top:2px;}
-.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:24px 0;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--grey);flex-wrap:wrap;gap:10px;}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.1);padding:24px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--grey);flex-wrap:wrap;gap:10px;}
 .footer-bottom a{color:var(--grey);}
 .footer-bottom a:hover{color:var(--blue);}
 .footer-bottom-links{display:flex;gap:26px;}
@@ -779,8 +779,10 @@ section{position:relative;}
   .hero-content{padding:96px 0 96px;}
   .hero p{font-size:16px;}
   .hero-nav{bottom:30px;}
-  .services-grid,.why-grid,.clients-strip,.process-grid,.blog-grid,.form-row,
+  .services-grid,.why-grid,.process-grid,.blog-grid,.form-row,
   .grid-2,.grid-3,.tile-grid,.jump-grid,.duo,.feature-rows,.strip-grid{grid-template-columns:1fr;}
+  .clients-strip{gap:14px;}
+  .client-logo{flex-basis:130px;max-width:none;height:64px;font-size:12px;}
   .tile{height:300px;}
   .strip-item{border-left:0;border-top:1px solid #e3e9ee;}
   .strip-item:first-child{border-top:0;}
@@ -790,7 +792,7 @@ section{position:relative;}
   .t-card{padding:38px 24px;}
   .t-card .quote-mark{font-size:60px;top:12px;left:18px;}
   .contact-info,.contact-form{padding:40px 26px;}
-  .footer-top{grid-template-columns:1fr;padding:60px 0 40px;}
+  .footer-top{grid-template-columns:1fr;padding:60px 24px 40px;}
   .footer-bottom{flex-direction:column;text-align:center;}
   .pad{padding:64px 0;}
   .pad-sm{padding:48px 0;}
