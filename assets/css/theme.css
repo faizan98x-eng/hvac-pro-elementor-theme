@@ -145,8 +145,11 @@ section{position:relative;}
   height:92px;transition:height var(--transition);
 }
 .site-header.is-stuck .header-inner{height:72px;}
-.brand img{height:46px;width:auto;transition:height var(--transition);}
-.site-header.is-stuck .brand img{height:38px;}
+/* The logo is a stacked mark (icon over wordmark over tagline, ~3:2), so it
+   needs more height than a horizontal lockup would to stay legible. */
+.brand{display:flex;align-items:center;}
+.brand img{height:66px;width:auto;transition:height var(--transition);}
+.site-header.is-stuck .brand img{height:54px;}
 
 .main-nav{display:flex;align-items:center;gap:40px;}
 .main-nav ul{display:flex;gap:34px;}
@@ -170,7 +173,7 @@ section{position:relative;}
 }
 .mobile-nav.open{transform:translateX(0);}
 .mobile-nav-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:34px;}
-.mobile-nav-head img{height:36px;width:auto;}
+.mobile-nav-head img{height:52px;width:auto;}
 .mobile-nav-close{background:none;border:1px solid rgba(255,255,255,.2);width:38px;height:38px;border-radius:50%;color:#fff;font-size:18px;}
 .mobile-nav ul{display:flex;flex-direction:column;gap:4px;}
 .mobile-nav a{display:block;color:#fff;padding:14px 4px;border-bottom:1px solid rgba(255,255,255,.08);font-weight:500;}
@@ -487,7 +490,7 @@ section{position:relative;}
 /* ---------- Footer ---------- */
 .site-footer{background:var(--navy);color:var(--grey);}
 .footer-top{padding:84px 24px 56px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1.2fr;gap:40px;}
-.footer-about img{height:44px;width:auto;margin-bottom:22px;}
+.footer-about img{height:72px;width:auto;margin-bottom:22px;}
 .footer-about p{font-size:14px;line-height:1.8;color:var(--grey);margin-bottom:22px;}
 .footer-social{display:flex;gap:10px;}
 .footer-social a{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;}
@@ -767,6 +770,8 @@ section{position:relative;}
   .pad-sm{padding:60px 0;}
   .section-head{margin-bottom:44px;}
   .hero-content{padding:130px 0 120px;}
+  .brand img{height:60px;}
+  .site-header.is-stuck .brand img{height:52px;}
 }
 /* Mobile: single column everywhere, comfortable touch targets. */
 @media(max-width:767px){
@@ -774,7 +779,9 @@ section{position:relative;}
   .topbar .container{justify-content:center;}
   .site-header{height:78px;}
   .header-inner{height:78px;}
-  .brand img{height:36px;}
+  .brand img{height:54px;}
+  .site-header.is-stuck .brand img{height:50px;}
+  .footer-about img{height:64px;}
   .hero{min-height:auto;padding-top:10px;}
   .hero-content{padding:96px 0 96px;}
   .hero p{font-size:16px;}
