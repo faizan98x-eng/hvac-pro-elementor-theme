@@ -19,6 +19,26 @@ $hvac_quote   = get_theme_mod( 'hvac_quote_url', '#' );
 <body <?php body_class(); ?>>
 <?php wp_body_open(); ?>
 
+<?php
+/*
+ * Preloader: a navy curtain with the logo mark that lifts away once the
+ * page is ready (theme.js animates it; the <noscript> rule and the
+ * JS timeout make sure it can never trap a visitor).
+ */
+$hvac_logo_id = get_theme_mod( 'custom_logo' );
+if ( $hvac_logo_id ) :
+	?>
+	<div class="preloader" aria-hidden="true">
+		<div class="preloader-inner">
+			<img src="<?php echo esc_url( wp_get_attachment_image_url( $hvac_logo_id, 'full' ) ); ?>" alt="">
+			<span class="preloader-bar"><i></i></span>
+		</div>
+	</div>
+	<noscript><style>.preloader{display:none !important;}</style></noscript>
+	<?php
+endif;
+?>
+
 <?php if ( $hvac_phone || $hvac_email || $hvac_address ) : ?>
 <div class="topbar">
 	<div class="container">

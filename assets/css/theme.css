@@ -951,3 +951,52 @@ section{position:relative;}
   .about-media-ring{display:none;}
   .btn{padding:14px 26px;}
 }
+
+/* ==========================================================================
+   Motion layer support (GSAP / Lenis). `html.has-motion` is added by
+   theme.js only when GSAP loaded and the visitor allows motion, so every
+   rule here is inert for everyone else.
+   ========================================================================== */
+
+/* Preloader curtain */
+.preloader{
+  position:fixed;inset:0;z-index:99999;background:var(--navy);
+  display:flex;align-items:center;justify-content:center;
+}
+.preloader-inner{text-align:center;}
+.preloader-inner img{height:96px;width:auto;margin:0 auto;}
+.preloader-bar{display:block;width:140px;height:3px;margin:24px auto 0;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden;}
+.preloader-bar i{display:block;height:100%;background:var(--blue);transform:scaleX(0);transform-origin:left center;}
+
+/* Lenis owns scrolling: native smooth-scroll would fight it. */
+html.lenis,html.lenis body{height:auto;}
+html.lenis{scroll-behavior:auto !important;}
+.lenis.lenis-smooth{scroll-behavior:auto !important;}
+.lenis.lenis-stopped{overflow:hidden;}
+
+/* Hand the intro choreography to GSAP (the CSS keyframes would double up). */
+html.has-motion .hero-content > *,html.has-motion .hero-pill,html.has-motion .page-hero h1,html.has-motion .breadcrumb{animation:none;}
+html.has-motion .reveal{opacity:1;transform:none;transition:none;}
+html.has-motion .process-grid::before{display:none;}
+html.has-motion .process-num{animation:none;}
+
+/* Split-text masks and the slight 3D on the hero words */
+.hero h1,.page-hero h1,.section-head h2{perspective:700px;}
+.sl{display:block;}
+.sw{display:inline-block;will-change:transform;}
+
+/* Process rail drawn by GSAP (replaces the CSS pseudo rail); the light beam
+   from the CSS layer keeps riding along it. */
+.process-rail{
+  position:absolute;top:34px;left:12%;right:12%;height:2px;border-radius:2px;
+  background:linear-gradient(90deg,rgba(37,171,224,.15),rgba(37,171,224,.55),rgba(37,171,224,.15));
+}
+@media(max-width:991px){.process-rail{display:none;}}
+
+/* 3D tilt */
+.services-grid,.tile-grid,.why-grid,.blog-grid,.duo,.jump-grid,.grid-2{perspective:1100px;}
+.tilt{transform-style:preserve-3d;will-change:transform;}
+.tilt:hover{transition:box-shadow var(--transition);}
+
+/* The header moves with GSAP; keep it above everything while it slides. */
+html.has-motion .site-header{will-change:transform;}

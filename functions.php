@@ -54,7 +54,21 @@ function hvac_pro_assets() {
 
 	wp_enqueue_style( 'hvac-pro-fonts', 'https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap', array(), null );
 	wp_enqueue_style( 'hvac-pro-theme', get_template_directory_uri() . '/assets/css/theme.css', array(), file_exists( $css_path ) ? filemtime( $css_path ) : HVAC_PRO_VERSION );
-	wp_enqueue_script( 'hvac-pro-theme', get_template_directory_uri() . '/assets/js/theme.js', array(), file_exists( $js_path ) ? filemtime( $js_path ) : HVAC_PRO_VERSION, true );
+
+	/*
+	 * Motion stack: GSAP (+ ScrollTrigger, SplitText) drives the scroll and
+	 * hero choreography, Lenis supplies the smooth scroll. All four are
+	 * pinned versions from jsDelivr, loaded deferred so they never block
+	 * first paint; theme.js degrades to its CSS-only behaviour if any of
+	 * them fail to load.
+	 */
+	$defer = array( 'strategy' => 'defer', 'in_footer' => true );
+	wp_enqueue_script( 'gsap', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js', array(), '3.13.0', $defer );
+	wp_enqueue_script( 'gsap-scrolltrigger', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js', array( 'gsap' ), '3.13.0', $defer );
+	wp_enqueue_script( 'gsap-splittext', 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js', array( 'gsap' ), '3.13.0', $defer );
+	wp_enqueue_script( 'lenis', 'https://cdn.jsdelivr.net/npm/lenis@1.3.4/dist/lenis.min.js', array(), '1.3.4', $defer );
+
+	wp_enqueue_script( 'hvac-pro-theme', get_template_directory_uri() . '/assets/js/theme.js', array( 'gsap', 'gsap-scrolltrigger', 'gsap-splittext', 'lenis' ), file_exists( $js_path ) ? filemtime( $js_path ) : HVAC_PRO_VERSION, $defer );
 }
 add_action( 'wp_enqueue_scripts', 'hvac_pro_assets' );
 
